@@ -42,7 +42,7 @@ namespace ProductsPrice
             products.Add(c);
 
             Cashier.products = products;
-            //Cashier.Save...*/
+            Cashier.SaveProducts(Cashier.path);*/
 
             while (true)
             {
