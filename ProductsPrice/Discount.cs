@@ -7,7 +7,7 @@ namespace ProductsPrice
 {
     //Базовый класс скидки
     [Serializable]
-    [XmlType(TypeName  = "discount")]
+    [XmlType(TypeName = "discount")]
     public class Discount
     {
         //конструктор
@@ -78,11 +78,11 @@ namespace ProductsPrice
 
         //значение скидки в процентах
         private int value_discount;
-        [XmlAttribute(AttributeName = "value", DataType = "int")]
-        public int ValueDiscount
+        private int ValueDiscount
         {
             set
             {
+                if (value>=0 && value<=100)
                 value_discount = value;
             }
             get
@@ -90,6 +90,26 @@ namespace ProductsPrice
                 return this.value_discount;
             }
         }
+
+        public int GetIntValueDiscount()
+        {
+            return this.value_discount;
+        }
+
+
+        [XmlAttribute(AttributeName = "value", DataType = "string")]
+        public string PercentDiscount
+        {
+            set
+            {
+                ValueDiscount = int.Parse(value.TrimEnd(new char[] { '%', ' ' }));
+            }
+            get
+            {
+                return $"{this.value_discount}%";
+            }
+        }
+
 
         //переопределение сравнения
         public override bool Equals(object obj)

@@ -88,7 +88,7 @@ namespace ProductsPrice
                              //сортировка скидок, сначала наименьшая
                              NameProduct = product.Key.ToString(),
                              discount = _d
-                         }).OrderBy(d => d.discount.ValueDiscount)
+                         }).OrderBy(d => d.discount.GetIntValueDiscount())
                      })
                      //объеденение скидок по товару
                      .SelectMany(discount => discount.Discounts)
@@ -173,7 +173,7 @@ namespace ProductsPrice
                 //сортировка скидок, сначала наименьшая
                 .Select(discount => new
                 {
-                    discount = discount.OrderBy(d=>d.discount.ValueDiscount)
+                    discount = discount.OrderBy(d=>d.discount.GetIntValueDiscount())
                 });
 
 
@@ -237,8 +237,8 @@ namespace ProductsPrice
 
             //вычисление цены после скидки
             float price_after_discount = full_price;
-            if ((_dis?.ValueDiscount ?? 0) > 0 && productsNamePurchase!=null)
-                price_after_discount = full_price - (float)(productsNamePurchase?.First(a => a.NameProduct == _product).FPrice ?? 0) / 100 * _dis.ValueDiscount;
+            if ((_dis?.GetIntValueDiscount() ?? 0) > 0 && productsNamePurchase!=null)
+                price_after_discount = full_price - (float)(productsNamePurchase?.First(a => a.NameProduct == _product).FPrice ?? 0) / 100 * _dis.GetIntValueDiscount();
 
             return $"Покупка: {purchase} - {full_price}р. " +
                     $"({(_dis?.ToString() ?? "Скидки нет")}" +
