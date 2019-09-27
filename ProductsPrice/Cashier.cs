@@ -182,8 +182,8 @@ namespace ProductsPrice
             foreach (var product in productsNamePurchase)
             {
                     discounts += $"Товар {product.NameProduct}" +
-                    $" с общей ценой {product.FPrice}р. и общим кол-вом {product.FSize}шт. " +
-                    $"покупки  с доступнымми скидками (по приоритету):" + Environment.NewLine;
+                    $" с общей ценой {product.FPrice}р. и общим кол-ом {product.FSize}шт. " +
+                    $"покупки  с доступными скидками (по приоритету):" + Environment.NewLine;
 
                     if (product.discounts != null && product.discounts.Count()>0)
                     {
@@ -225,7 +225,7 @@ namespace ProductsPrice
                 _dis = _discounts.First().discount.First().discount;
                 _product = _discounts.First().discount.First().NameProduct;
                 discounts += $"Покупка: {purchase} " +
-                    $"с полной ценой {full_price} и " +
+                    $"с полной ценой {full_price}р. и " +
                     $"скидка: ({(_dis?.ToString() ?? "Скидки нет")}) " +
                     $"товар {_discounts.First().discount.First().NameProduct}" + Environment.NewLine;
             }
